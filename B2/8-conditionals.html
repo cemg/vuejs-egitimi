@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <input type="text" class="form-control" v-model="isim">
+    <span v-if="isim.length>0">{{ isim.length }} karakter</span>
+    <hr>
+    <div v-if="isVisibleDetaylar">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam autem consequatur error id ipsa, itaque minima nam natus nihil pariatur quidem quos sunt! Asperiores blanditiis doloremque in perferendis ratione!
+    </div>
+    <div v-show="isVisibleDetaylar">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aperiam autem consequatur error id ipsa, itaque minima nam natus nihil pariatur quidem quos sunt! Asperiores blanditiis doloremque in perferendis ratione!
+    </div>
+    <button class="btn btn-primary" @click="gostergizle">Göster/Gizle</button>
+    <hr>
+    <select v-model="kullaniciTipi" class="form-control">
+        <option value="">Seçiniz</option>
+        <option>Müşteri</option>
+        <option>Yönetici</option>
+    </select>
+    <div v-if="kullaniciTipi === 'Müşteri'">
+        <h1>Müşteri Bilgileri</h1>
+        ...
+    </div>
+    <div v-else-if="kullaniciTipi === 'Yönetici'">
+        <h1>Yönetici Bilgileri</h1>
+        ...
+    </div>
+    <div v-else>
+        <h1>Diğer Bilgileri</h1>
+        ...
+    </div>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            isVisibleDetaylar: false,
+            isim: 'Cem',
+            kullaniciTipi: ''
+        },
+        methods: {
+            gostergizle() {
+                this.isVisibleDetaylar = !this.isVisibleDetaylar;
+            }
+        }
+    })
+</script>
+</body>
+</html>

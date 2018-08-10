@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <p>{{ mesaj }}</p>
+    <p v-text="mesaj_html"></p>
+    <p v-html="mesaj_html"></p>
+    <hr>
+    <div>
+        <label>Mesaj</label>
+        <input type="text" v-model="mesaj_html" class="form-control">
+    </div>
+    <hr>
+    <div>
+        <label>Fiyat</label>
+        <input type="text" v-model.number="fiyat" class="form-control">
+        <p>KDV Tutarı: {{ fiyat * 18 / 100 }}</p>
+        <p>{{ (fiyat * 18 / 100)<5 ? 'KDV Düşük' : 'KDV Yüksek' }}</p>
+        <p v-once>{{ (fiyat * 18 / 100)<5 ? 'KDV Düşük' : 'KDV Yüksek' }}</p>
+    </div>
+
+
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            mesaj: 'Merhaba Vue!',
+            mesaj_html: 'Merhaba <b>Cem</b>',
+            fiyat: 12
+        }
+    })
+</script>
+</body>
+</html>

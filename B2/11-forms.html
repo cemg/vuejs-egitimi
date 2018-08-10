@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <form action="">
+        <label>Adınız</label>
+        <input type="text" v-model="kullanici.ad" class="form-control col-4">
+
+        <label>Adres</label>
+        <textarea v-model="kullanici.adres" class="form-control col-4"></textarea>
+
+        <hr>
+
+        <label>
+            <input type="checkbox" v-model="kullanici.aktif_mi"> Aktif Mi
+        </label>
+        <pre class="form-text text-muted">{{ kullanici.aktif_mi }}</pre>
+
+        <hr>
+
+        <label>
+            <input type="checkbox" v-model="kullanici.secilen_roller" value="Yönetici"> Yönetici
+        </label>
+        <label>
+            <input type="checkbox" v-model="kullanici.secilen_roller" value="Editör"> Editör
+        </label>
+        <label>
+            <input type="checkbox" v-model="kullanici.secilen_roller" value="Müşteri"> Müşteri
+        </label>
+        <select v-model="kullanici.secilen_roller" class="form-control col-4" multiple>
+            <option>Yönetici</option>
+            <option>Editör</option>
+            <option>Müşteri</option>
+        </select>
+        <pre class="form-text text-muted">{{ kullanici.secilen_roller }}</pre>
+
+        <hr>
+
+        <label>
+            <input type="radio" v-model="kullanici.cinsiyet" value="E"> Erkek
+        </label>
+        <label>
+            <input type="radio" v-model="kullanici.cinsiyet" value="K"> Kadın
+        </label>
+        <pre class="form-text text-muted">{{ kullanici.cinsiyet }}</pre>
+
+        <hr>
+        <label>Doğum Yeri</label>
+        <select v-model="kullanici.dogum_yeri" class="form-control col-4">
+            <option value="">Seçiniz</option>
+            <option v-for="sehir in sehirler" :value="sehir.value">
+                {{ sehir.text }}
+            </option>
+        </select>
+        <pre class="form-text text-muted">{{ kullanici.dogum_yeri }}</pre>
+    </form>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            kullanici: {
+                ad: 'Cem',
+                adres: 'Ankara',
+                aktif_mi: false,
+                secilen_roller: [],
+                cinsiyet: 'E',
+                dogum_yeri: 6
+            },
+            sehirler: [
+                { text: 'Ankara', value: 6 },
+                { text: 'İstanbul', value: 34 },
+                { text: 'İzmir',  value: 35 }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

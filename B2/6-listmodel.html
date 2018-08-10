@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <h1>Kullanıcılar ({{ kullanicilar.length }} kullanıcı)</h1>
+    <hr>
+    <table class="table table-bordered table-hover">
+        <tr class="bg-success text-white">
+            <th>index</th>
+            <th>id</th>
+            <th>isim</th>
+            <th>rol</th>
+        </tr>
+        <tr v-for="(kullanici, index) in kullanicilar">
+            <td>{{ index }}</td>
+            <td>{{ kullanici.id }}</td>
+            <td>{{ kullanici.isim }}</td>
+            <td>{{ kullanici.rol }}</td>
+        </tr>
+    </table>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            kullanicilar: [
+                {
+                    id: 25,
+                    isim: 'Cem',
+                    rol: 'Admin'
+                },
+                {
+                    id: 32,
+                    isim: 'Esra',
+                    rol: 'Admin'
+                },
+                {
+                    id: 54,
+                    isim: 'Ceyda',
+                    rol: 'User'
+                }]
+        }
+    })
+</script>
+</body>
+</html>

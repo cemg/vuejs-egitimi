@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <div class="alert alert-success">
+        {{ mesaj }}
+    </div>
+    <button class="btn btn-sm btn-info" v-on:click="karsila">Karşıla</button>
+    <button class="btn btn-sm btn-danger" @click="ugurla">Uğurla</button>
+    <hr>
+    <form @submit.prevent="true">
+        <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="email" v-model="email"
+                       v-on:keypress.enter="emailKaydet">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            mesaj: 'Merhaba'
+        },
+        methods: {
+            karsila() {
+                this.mesaj = 'Hoşgeldiniz';
+            },
+            ugurla() {
+                this.mesaj = 'Güle güle';
+            },
+            emailKaydet() {
+                if (this.email != null)
+                    this.mesaj = 'Email adresiniz kaydedildi.';
+            }
+        }
+    })
+</script>
+</body>
+</html>

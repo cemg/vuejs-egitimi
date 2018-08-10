@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <p>{{ baslik | buyukharf }}</p>
+    <p>{{ baslik | kucukharf }}</p>
+    <p>{{ baslik | ilkharfbuyuk }}</p>
+    <p>{{ baslik | ilkharflerbuyuk }}</p>
+    <p>{{ baslik | terstenyaz }}</p>
+    <p>{{ baslik | truncate(8) }}</p>
+    <p>{{ baslik | terstenyaz | truncate(8) }}</p>
+    <p :title="baslik | terstenyaz">Tersten yaz filtresi</p>
+    <hr>
+    <input type="text" v-model.trim="baslik" class="form-control">
+    <pre class="alert alert-info">{{ baslik }}</pre>
+    <hr>
+    <input type="text" v-model.number="sayi" class="form-control">
+    <pre class="alert alert-info">{{ sayi+sayi }}</pre>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    Vue.filter('terstenyaz', function(value) {
+        return value.toString().split('').reverse().join('');
+    });
+
+    Vue.filter('truncate', function(value, length) {
+        if (value.length < length) {
+            return value;
+        }
+        length = length - 3;
+
+        return value.substring(0, length) + '...';
+    });
+
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            baslik: 'lorem ipsum dolor sit amet',
+            sayi: 10
+        },
+        filters: {
+            buyukharf(value) {
+                return value.toString().toUpperCase();
+            },
+            kucukharf(value) {
+                return value.toString().toLowerCase();
+            },
+            ilkharfbuyuk(value) {
+                return value.toString().charAt(0).toUpperCase() + value.slice(1);
+            },
+            ilkharflerbuyuk(value) {
+                let kelimeler = value.toString().split(' ');
+                let donenDeger = '';
+                kelimeler.forEach(kelime => {
+                    donenDeger += kelime.toString().charAt(0).toUpperCase() + kelime.slice(1) + ' ';
+                });
+                return donenDeger;
+            }
+        }
+    })
+</script>
+</body>
+</html>

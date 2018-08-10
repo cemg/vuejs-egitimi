@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <form>
+        Odun:
+        <input type="number" v-model="odun" class="form-control col-2">
+
+        Taş:
+        <input type="number" v-model="tas" class="form-control col-2">
+
+        Toplam Kullanılan Malzeme: {{ toplam }}
+
+        Toplam Kullanılan Malzeme: {{ toplam2 }}
+    </form>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            odun: 0,
+            tas: 0,
+            toplam: 0
+        },
+        watch: {
+            odun(newValue, oldValue) {
+                console.log('Değerler:', oldValue, newValue);
+                this.toplam = parseInt(this.odun) + parseInt(this.tas);
+            },
+            tas(newValue, oldValue) {
+                console.log('Değerler:', oldValue, newValue);
+                this.toplam = parseInt(this.odun) + parseInt(this.tas);
+            }
+        },
+        computed: {
+            toplam2() {
+                return parseInt(this.odun) + parseInt(this.tas);
+            }
+        }
+    })
+</script>
+</body>
+</html>

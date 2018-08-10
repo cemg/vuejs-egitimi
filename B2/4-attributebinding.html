@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <p><a v-bind:href="linkSite" v-bind:title="linkAciklama">{{ linkAciklama }}</a></p>
+    <p><a :href="linkSite" :title="linkAciklama">{{ linkAciklama }}</a></p>
+    <hr>
+    <div :id="'kurs' + id">Kurs {{ id }}</div>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            linkSite: 'http://www.uzaktankurs.com',
+            linkAciklama: 'Uzaktan Kurs',
+            id: 5
+        }
+    })
+</script>
+</body>
+</html>

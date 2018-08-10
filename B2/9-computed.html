@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <input v-model="ad" class="form-control">
+    <input v-model="soyad" class="form-control">
+    <p>{{ adsoyad }}</p>
+    <hr>
+    <input v-model="urun_fiyati" class="form-control">
+    <p>{{ urun_kdv_fiyati }}</p>
+    <hr>
+    <p>{{ adsoyad2 }}</p>
+    <hr>
+    <p>{{ adsoyad }}</p>
+    <p>{{ adsoyad }}</p>
+    <p>{{ adsoyad }}</p>
+    <hr>
+    <p>{{ adsoyad3() }}</p>
+    <p>{{ adsoyad3() }}</p>
+    <p>{{ adsoyad3() }}</p>
+    <hr>
+    <ul>
+        <li v-for="kullanici in c_ile_baslayan_kullanicilar">
+            {{ kullanici}}
+        </li>
+    </ul>
+
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            ad: 'cem',
+            soyad: 'gündüzoğlu',
+            urun_fiyati: 12,
+            kullanicilar: ['cem', 'esra', 'ceyda', 'murat', 'ebru']
+        },
+        methods: {
+            adsoyad3() {
+                console.log('Metot Çalıştı');
+                return this.ad + ' ' + this.soyad;
+            }
+        },
+        computed: {
+            adsoyad() {
+                console.log('Computed Çalıştı');
+                return this.ad + ' ' + this.soyad;
+            },
+            urun_kdv_fiyati() {
+                return this.urun_fiyati * 18 / 100;
+            },
+            adsoyad2: {
+                get: function() {
+                    return this.ad + ' ' + this.soyad;
+                },
+                set: function(value) {
+                    let parts = value.split(' ');
+                    this.ad = parts[0];
+                    this.soyad = parts[1];
+                }
+            },
+            c_ile_baslayan_kullanicilar() {
+                return this.kullanicilar.filter(k => k.startsWith('c'));
+            }
+        }
+    })
+</script>
+</body>
+</html>

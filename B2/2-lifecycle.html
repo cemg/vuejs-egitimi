@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <span class="badge badge-success">{{ sayi }}</span>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            sayi: 5
+        },
+		methods: {
+			change() {
+				this.sayi = Math.floor(Math.random() * 49) + 1;
+			},
+			destroy() {
+				app.$destroy();
+			}
+        },
+        created() {
+            console.log('Instance oluşturuldu.');
+        },
+        mounted() {
+            console.log("DOM'a eklendi");
+            this.sayi = Math.floor(Math.random() * 49) + 1;
+        },
+        updated() {
+            console.log('DOM güncellendi');
+        },
+        destroyed() {
+            console.log('Instance silindi');
+        }
+    });
+</script>
+</body>
+</html>
