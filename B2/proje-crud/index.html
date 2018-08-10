@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proje - Kullanıcı Yönetimi (CRUD)</title>
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <button class="btn btn-info float-right" @click="kullaniciYeni">Yeni Kullanıcı</button>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="kullaniciModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kullanıcı</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form @submit.prevent="true">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">isim</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" v-model="aktifKullanici.isim" placeholder="isim">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">rol</label>
+                            <div class="col-sm-10">
+                                <select v-model="aktifKullanici.rol" class="form-control">
+                                    <option value="">Seçiniz</option>
+                                    <option>Admin</option>
+                                    <option>User</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @click="kullaniciKaydet">Kaydet</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1>Kullanıcılar ({{ kullanicilar.length }} kullanıcı)</h1>
+    <hr>
+    <table class="table table-bordered table-hover">
+        <tr class="bg-success text-white">
+            <th>index</th>
+            <th>id</th>
+            <th>isim</th>
+            <th>rol</th>
+            <th>işlem</th>
+        </tr>
+        <tr v-for="(kullanici, index) in kullanicilar">
+            <td>{{ index }}</td>
+            <td>{{ kullanici.id }}</td>
+            <td>{{ kullanici.isim }}</td>
+            <td>{{ kullanici.rol }}</td>
+            <td>
+                <a href="javascript:" @click="kullaniciSil(index)" class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="javascript:" @click="kullaniciSil2(kullanici.id)" class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="javascript:" @click="kullaniciDuzenle(index)" class="btn btn-sm btn-warning">
+                    <i class="fa fa-pencil"></i>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="../../assets/js/vue.js"></script>
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
