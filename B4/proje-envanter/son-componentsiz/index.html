@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../assets/css/app.css">
+    <title>Envanter Takip Projesi</title>
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="box.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Envanter Takip Projesi
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <form class="form-inline my-2 my-lg-0 ml-auto" @submit.prevent="searchItems">
+                    <input type="search" class="form-control mr-sm-2" placeholder="Ara" aria-label="Ara" v-model="search">
+                    <button class="btn btn-success my-sm-0" type="submit">Ara</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Envanter Kayıt Formu</h3>
+                <form @submit.prevent="saveItem">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Başlık</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="item.baslik" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Kategori</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="item.kategori">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Adet</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="item.adet">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Fiyat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="item.fiyat" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-2">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h3>Aktif Kayıtlar</h3>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Başlık</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Adet</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th v-if="!activeItems.length">
+                            Listede kayıt yok
+                        </th>
+                    </tr>
+                    <tr v-for="(item, index) in activeItems" :key="item.id">
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.baslik }}</td>
+                        <td>{{ item.kategori }}</td>
+                        <td>{{ item.adet }}</td>
+                        <td>{{ item.fiyat }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" @click="deleteItem(item.id)">
+                                Sil
+                            </button>
+                            <button href="#" class="btn btn-sm btn-secondary" @click="changeItemStatus(item)" v-if="!item.arsiv">
+                                Arşiv
+                            </button>
+                            <button class="btn btn-sm btn-info" @click="changeItemStatus(item)" v-if="item.arsiv">
+                                Arşivden Kaldır
+                            </button>
+                        </td>
+                    </tr>
+                    <tr v-if="activeItems.length">
+                        <td>Toplam</td>
+                        <td colspan="2"></td>
+                        <td>{{totalItemActive}}</td>
+                        <td colspan="2">{{totalPriceActive}} TL</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col">
+                <h3>Arşiv Kayıtları</h3>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Başlık</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Adet</th>
+                        <th scope="col">Fiyat</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th v-if="!archivedItems.length">
+                            Listede kayıt yok
+                        </th>
+                    </tr>
+                    <tr v-for="(item, index) in archivedItems" :key="item.id">
+                        <th scope="row">{{ item.id }}</th>
+                        <td>{{ item.baslik }}</td>
+                        <td>{{ item.kategori }}</td>
+                        <td>{{ item.adet }}</td>
+                        <td>{{ item.fiyat }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" @click="deleteItem(item.id)">
+                                Sil
+                            </button>
+                            <button href="#" class="btn btn-sm btn-secondary" @click="changeItemStatus(item)" v-if="!item.arsiv">
+                                Arşiv
+                            </button>
+                            <button class="btn btn-sm btn-info" @click="changeItemStatus(item)" v-if="item.arsiv">
+                                Arşivden Kaldır
+                            </button>
+                        </td>
+                    </tr>
+                    <tr v-if="archivedItems.length">
+                        <td>Toplam</td>
+                        <td colspan="2"></td>
+                        <td>{{totalItemArchive}}</td>
+                        <td colspan="2">{{totalPriceArchive}} TL</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../../assets/js/jquery.min.js "></script>
+<script src="../../../assets/js/bootstrap.min.js "></script>
+<script src="../../../assets/js/vue.js "></script>
+<script src="app.js "></script>
+</body>
+</html>
