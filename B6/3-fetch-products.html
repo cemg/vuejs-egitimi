@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <h2>Ürünler</h2>
+    <hr>
+    <p v-if="!products.length">Ürün bulunamadı!</p>
+
+    <b>Toplam Adet:</b> {{products.length}},
+    <b>Toplam Tutar:</b> {{paymentTotal}},
+    <b>Toplam Kdv:</b> {{paymentTotalTax}}
+
+    <div class="row" v-if="products.length">
+        <div class="col-3" v-for="(item, index) in products">
+            <div class="card">
+                <img class="card-img-top" style="height: 230px;" :src="item.resim" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.baslik }}</h5>
+                    <p class="card-text">
+                        <b>Kategori:</b> {{ item.kategori }},
+                        <b>Tutar:</b> {{ item.tutar }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            products: []
+        },
+        created() {
+            fetch('db-products.json')
+                .then((res) => {
+                    return res.json();
+                })
+                .then((res) => {
+                    this.products = res.products;
+                })
+        },
+        computed: {
+            paymentTotal() {
+                let total = 0;
+                this.products.forEach((product) => {
+                    total += parseFloat(product.tutar);
+                });
+                return total.toFixed(2);
+            },
+            paymentTotalTax() {
+                return (this.paymentTotal * 18 / 100).toFixed(2);
+            }
+        }
+    })
+</script>
+</body>
+</html>

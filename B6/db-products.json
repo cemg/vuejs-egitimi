@@ -1,0 +1,35 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "baslik": "Adana Kebap",
+      "kategori": "Kebaplar",
+      "tutar": "24.90",
+      "resim": "../assets/img/urun-adana.jpg"
+    },
+    {
+      "id": 2,
+      "baslik": "Et Döner",
+      "kategori": "Dönerler",
+      "tutar": "14",
+      "resim": "../assets/img/urun-etdoner.jpg"
+    },
+    {
+      "id": 3,
+      "baslik": "Izgara Köfte",
+      "kategori": "Izgaralar",
+      "tutar": "18",
+      "resim": "../assets/img/urun-izgarakofte.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "kategori_adi": "Yazılım"
+    },
+    {
+      "id": 2,
+      "kategori_adi": "Web Programlama"
+    }
+  ]
+}

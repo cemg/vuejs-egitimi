@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <div class="container">
+        <p v-if="isLoading">Yükleniyor.</p>
+        <h2>Filmler</h2>
+        <hr>
+        <form class="form-inline" @submit.prevent="true">
+            <input type="text" class="form-control col-4" v-model="search">
+            <button class="btn btn-primary" @click="searchFilm">Ara</button>
+        </form>
+        <table class="table table-hover" v-if="films.length">
+            <tr v-if="films.length">
+                <td colspan="2">{{films.length}} kayıt bulundu</td>
+            </tr>
+            <tr v-if="!films.length">
+                <td colspan="2">Kayıt yok</td>
+            </tr>
+            <tr v-for="(item, index) in films">
+                <td>
+                    <img class="img-responsive" v-bind:src="item.Poster" style="height: 150px">
+                </td>
+                <td>
+                    <h4>{{item.Title}} <small>{{item.Year}}</small></h4>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            isLoading: false,
+            search: '',
+            films: []
+        },
+        methods: {
+            searchFilm() {
+                this.isLoading = true;
+                fetch('http://www.omdbapi.com/?s=' + this.search +'&page=1&apikey=68ca10bc')
+                    .then((res) => {
+                        return res.json();
+                    })
+                    .then((res) => {
+                        this.films = res.Search;
+                        this.isLoading = false;
+                    })
+            }
+        }
+    })
+</script>
+</body>
+</html>
