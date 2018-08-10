@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <alert>Merhaba</alert>
+    <alert>Nasılsın</alert>
+
+    <card>Lorem ipsum</card>
+    <card></card>
+
+    <card-with-header>
+        <template slot="header">Üye Girişi</template>
+
+        Kullanıcı adı-Şifre
+
+        <template slot="footer">
+            <button class="btn btn-sm btn-primary">Giriş Yap</button>
+        </template>
+    </card-with-header>
+
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    Vue.component('Alert', {
+        template: `
+            <div class="alert alert-success">
+                <slot></slot>
+            </div>`
+    });
+
+    Vue.component('Card', {
+        template: `
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-text">
+                        <slot>Merhaba</slot>
+                    </div>
+                </div>
+            </div>`
+    });
+
+    Vue.component('CardWithHeader', {
+        template: `
+            <div class="card">
+                <div class="card-header">
+                    <slot name="header">Başlık</slot>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        <slot>İçerik</slot>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <slot name="footer">Alt kısım</slot>
+                </div>
+            </div>`
+    });
+
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {}
+    })
+</script>
+</body>
+</html>

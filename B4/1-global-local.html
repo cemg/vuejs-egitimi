@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <alert-count></alert-count>
+    <alert-count></alert-count>
+    <alert-count2></alert-count2>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    Vue.component('AlertCount', {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        template: `
+            <div class="alert alert-success">
+                Merhaba
+                <button @click="count++" class="btn btn-sm btn-primary">
+                    {{ count }} kez tıkladın
+                </button>
+            </div>`
+    });
+
+    var AlertCount2 = {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        template: `
+            <div class="alert alert-success">
+                Merhaba
+                <button @click="count++" class="btn btn-sm btn-primary">
+                    {{ count }} kez tıkladın
+                </button>
+            </div>`
+    };
+
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {},
+        components: {
+            'alert-count2': AlertCount2
+        }
+    });
+</script>
+</body>
+</html>

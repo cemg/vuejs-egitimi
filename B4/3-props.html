@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <card-with-header
+        header="Üye Girişi"
+        :body="bodyIcerigi"
+        footer-button-text="Giriş yap"
+    >
+    </card-with-header>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    Vue.component('CardWithHeader', {
+        props: ['header', 'body', 'footerButtonText'],
+        template: `
+            <div class="card">
+                <div class="card-header">
+                    {{ header }}
+                </div>
+                <div class="card-body">
+                    {{ body }}
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-sm btn-primary">{{ footerButtonText }}</button>
+                </div>
+            </div>`
+    });
+
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            bodyIcerigi: 'Kullanıcı adı-şifre'
+        }
+    })
+</script>
+</body>
+</html>

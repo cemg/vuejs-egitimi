@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <div class="row">
+        <card-item :item="sampleItem"></card-item>
+    </div>
+    <modal></modal>
+
+    <card-list :title="'Kurslar'" :cards="sampleItems"></card-list>
+</div>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/vue.js"></script>
+<script>
+    window.EventBus = new Vue();
+
+    Vue.component('CardItem', {
+        props: {
+            item: {required: true, default: {}}
+        },
+        template: `
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <div class="card" style="height: 400px">
+                    <img class="card-img-top img-fluid" :src="item.imageUrl" alt="Card image cap" style="height: 180px">
+                    <div class="card-body">
+                        <h3 class="card-title" v-text="item.title"></h3>
+                        <p class="card-text" v-text="item.description"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="javascript:" class="btn btn-primary" @click="showDetail">Detay</a>
+                    </div>
+                </div>
+            </div>`,
+        methods: {
+            showDetail() {
+                $('#itemModalDetail').modal();
+                window.EventBus.$emit('showDetailInModal', this.item);
+            }
+        }
+    });
+
+    Vue.component('Modal', {
+        props: {
+            title: {required: false, default: 'Modal Title'},
+            body: {required: false, default: 'Modal Body'}
+        },
+        template: `
+            <div class="modal fade" id="itemModalDetail" tabindex="-1" role="dialog" aria-labelledby="itemModalDetailLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title">{{ title }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" v-html="body">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`,
+        created() {
+            window.EventBus.$on('showDetailInModal', (item) => {
+                this.title = item.title;
+                this.body = item.detail;
+            });
+        }
+    });
+
+    Vue.component('CardList', {
+        props: {
+            title: { type: String, required: false, default: 'Card List' },
+            cards: { type: Array, required: true, default: [] }
+        },
+        template: `
+            <div class="card-list">
+                <h2>{{ title }}</h2>
+                <div class="row">
+                    <card-item :item="card" v-for="(card, index) in cards" :key="card.title"></card-item>
+                </div>
+            </div>`
+    });
+
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            sampleItem: {
+                imageUrl: '../assets/img/pic2.jpg',
+                title: 'Sample Title',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+                detail: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+            },
+            sampleItems: [
+            {
+                title: 'JavaScript Kursu',
+                description: 'JavaScript ile web uygulamaları yapın',
+                detail: 'JavaScript ile web uygulamaları yapın<br><b>Fiyatı:</b> 29',
+                price: 29,
+                imageUrl: '../assets/img/coverJS101.jpg'
+            }, {
+                title: 'Vue.js Kursu',
+                description: 'Vue.js ile web uygulamaları yapın',
+                detail: 'Vue.js ile web uygulamaları yapın<br><b>Fiyatı:</b> 39',
+                price: 39,
+                imageUrl: '../assets/img/coverVUE101.jpg'
+            }, {
+                title: 'Laravel Kursu',
+                description: 'Laravel ile web uygulamaları yapın',
+                detail: 'Laravel ile web uygulamaları yapın<br><b>Fiyatı:</b> 59',
+                price: 59,
+                imageUrl: '../assets/img/coverLRV101.jpg'
+            }, {
+                title: 'Ionic ile Mobil Uygulama Geliştirme Kursu',
+                description: 'Ionic ile mobil uygulamalar geliştirin',
+                detail: 'Ionic ile mobil uygulamalar geliştirin<br><b>Fiyatı:</b> 59',
+                price: 59,
+                imageUrl: '../assets/img/coverIONIC.jpg'
+            }]
+        }
+    })
+</script>
+</body>
+</html>

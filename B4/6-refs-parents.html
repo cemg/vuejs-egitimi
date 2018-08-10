@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <parent></parent>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    Vue.component('Parent', {
+        template: `
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">Parent</div>
+                <div class="card-body">
+                    <button @click="callChildMethod" class="btn btn-danger">
+                        Call Child Method
+                    </button>
+					<child ref="child1"></child>
+                </div>
+            </div>`,
+        methods: {
+            callChildMethod() {
+                this.$refs.child1.childMethod();
+            },
+            parentMethod() {
+                console.log('Parent method called...');
+            }
+        }
+    });
+
+    Vue.component('Child', {
+        template: `
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Child</div>
+                <div class="card-body">
+                    <button @click="callParentMethod" class="btn btn-danger">
+                        Call Parent Method
+                    </button>
+                </div>
+            </div>`,
+        methods: {
+            childMethod() {
+                console.log('Child method called...');
+            },
+            callParentMethod() {
+                this.$parent.parentMethod();
+            }
+        }
+    });
+
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {}
+    })
+</script>
+</body>
+</html>
