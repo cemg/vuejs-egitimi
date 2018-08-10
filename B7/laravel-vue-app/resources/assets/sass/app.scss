@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+
+@import '~bootstrap/scss/bootstrap';
+
+@import '~toastr/toastr';
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+.navbar {
+  margin-bottom: 20px;
+}
