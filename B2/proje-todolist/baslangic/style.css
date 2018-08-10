@@ -1,0 +1,11 @@
+body {
+  margin-top: 80px;
+}
+
+.list-group-item.row {
+  display: flex;
+}
+
+#sidebar  h2 {
+  font-size: 1.1rem; color: #ccc;
+}
