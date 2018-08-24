@@ -1,0 +1,150 @@
+{
+  "hareket_noktalari": [
+    {
+      "id": 1,
+      "aciklama": "İstanbul-Otogar"
+    },
+    {
+      "id": 2,
+      "aciklama": "Ankara-Otogar"
+    },
+    {
+      "id": 3,
+      "aciklama": "İzmir-Otogar"
+    },
+    {
+      "id": 4,
+      "aciklama": "Bursa-Otogar"
+    },
+    {
+      "id": 5,
+      "aciklama": "Antalya-Otogar"
+    }
+  ],
+  "seferler": [
+    {
+      "id": 1,
+      "kalkis_noktasi": 2,
+      "varis_noktasi": 1,
+      "kalkis_tarihi": "2018-08-05 21:00",
+      "bilet_fiyati": 60
+    },
+    {
+      "id": 2,
+      "kalkis_noktasi": 2,
+      "varis_noktasi": 3,
+      "kalkis_tarihi": "2018-08-05 22:00",
+      "bilet_fiyati": 65
+    }
+  ],
+  "koltuklar": [
+    {
+      "id": 1,
+      "sefer_id": 1,
+      "numara": 1,
+      "tip": "Tekli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "E",
+      "durum": 1
+    },
+    {
+      "id": 2,
+      "sefer_id": 1,
+      "numara": 2,
+      "tip": "Çiftli",
+      "konum": "Koridor",
+      "cinsiyet": "K",
+      "durum": 1
+    },
+    {
+      "id": 3,
+      "sefer_id": 1,
+      "numara": 3,
+      "tip": "Çiftli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "E",
+      "durum": 1
+    },
+    {
+      "id": 4,
+      "sefer_id": 1,
+      "numara": 4,
+      "tip": "Tekli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 5,
+      "sefer_id": 1,
+      "numara": 5,
+      "tip": "Çiftli",
+      "konum": "Koridor",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 6,
+      "sefer_id": 1,
+      "numara": 6,
+      "tip": "Çiftli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 7,
+      "sefer_id": 1,
+      "numara": 7,
+      "tip": "Tekli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 8,
+      "sefer_id": 1,
+      "numara": 8,
+      "tip": "Çiftli",
+      "konum": "Koridor",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 9,
+      "sefer_id": 1,
+      "numara": 9,
+      "tip": "Çiftli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 10,
+      "sefer_id": 1,
+      "numara": 10,
+      "tip": "Tekli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "",
+      "durum": 1
+    },
+    {
+      "id": 11,
+      "sefer_id": 1,
+      "numara": 11,
+      "tip": "Çiftli",
+      "konum": "Koridor",
+      "cinsiyet": "",
+      "durum": 0
+    },
+    {
+      "id": 12,
+      "sefer_id": 1,
+      "numara": 12,
+      "tip": "Çiftli",
+      "konum": "Cam Kenarı",
+      "cinsiyet": "",
+      "durum": 0
+    }
+  ]
+}
