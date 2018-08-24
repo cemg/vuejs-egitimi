@@ -6,7 +6,7 @@ Vue.use(VueFire)
 
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyC65AfkXZxKphjZU8D6i_nJJ_j2w9kf1AM",
+    apiKey: "YOUR-API-KEY",
     authDomain: "vue-app-2.firebaseapp.com",
     databaseURL: "https://vue-app-2.firebaseio.com",
     projectId: "vue-app-2",
