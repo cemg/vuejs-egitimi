@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <p>{{ sharedState.mesaj }}</p>
+    <p>{{ privateState.mesaj }}</p>
+    <bilesen1></bilesen1>
+    <bilesen2></bilesen2>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    let store = {
+        state: {
+            mesaj: 'Merhaba'
+        }
+    };
+
+    Vue.component('Bilesen1', {
+        template: '<div>{{ sharedState.mesaj }}</div>',
+        data() {
+            return {
+                privateState: {},
+                sharedState: store.state
+            }
+        }
+    });
+    Vue.component('Bilesen2', {
+        template: '<div>{{ sharedState.mesaj }}</div>',
+        data() {
+            return {
+                privateState: {},
+                sharedState: store.state
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            privateState: {
+                'mesaj': 'Instance mesajı'
+            },
+            sharedState: store.state
+        }
+    })
+</script>
+</body>
+</html>
