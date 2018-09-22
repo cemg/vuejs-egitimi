@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css">
+</head>
+<body class="p-5">
+<div id="app">
+    <input type="radio" v-model="sayfa" value="p-hakkimizda"> Hakkımızda
+    <input type="radio" v-model="sayfa" value="p-urunler"> Ürünler
+    <input type="radio" v-model="sayfa" value="p-iletisim"> İletişim
+
+    <transition name="component-animation"
+                enter-active-class="animated fadeIn"
+                leave-active-class="animated bounceOutRight"
+                mode="out-in">
+        <component :is="sayfa"></component>
+    </transition>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            sayfa: 'p-urunler'
+        },
+        components: {
+            'p-hakkimizda': {template: '<h1>Hakkımızda</h1>'},
+            'p-urunler': {template: '<h1>Ürünler</h1>'},
+            'p-iletisim': {template: '<h1>İletişim</h1>'},
+        }
+    })
+</script>
+</body>
+</html>

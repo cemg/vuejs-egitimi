@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 3s ease-out;
+        }
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="p-5">
+<div id="app">
+    <button class="btn btn-primary" @click="isFadeShowing = !isFadeShowing">Fade Animasyonu</button>
+    <transition name="fade">
+        <div class="alert alert-success" v-if="isFadeShowing">Fade Animasyonu</div>
+    </transition>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            isFadeShowing: false
+        }
+    })
+</script>
+</body>
+</html>

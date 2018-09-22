@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css">
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+        <div class="container">
+            <a href="#" class="navbar-brand">Routing App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <router-link to="/hakkimizda" class="nav-link" active-class="active">Hakkımızda</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="urunlerAdresi" class="nav-link" active-class="active">Ürünler</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link :to="{ path: 'iletisim' }" class="nav-link" active-class="active">İletişim</router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <transition name="component-animation"
+                    enter-active-class="animated fadeIn"
+                    leave-active-class="animated bounceOutRight"
+                    mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script src="../assets/js/vue-router.js"></script>
+
+<script>
+    const Page_Anasayfa = {
+        template: '<h1>Hoşgeldiniz</h1>'
+    };
+    const Page_Hakkimizda = {
+        template: '<h1>Hakkımızda</h1>'
+    };
+    const Page_Urunler = {
+        template: '<h1>Ürünler</h1>'
+    };
+    const Page_Iletisim = {
+        template: '<h1>İletişim</h1>'
+    };
+
+    const routes = [
+        {path: '/', component: Page_Anasayfa},
+        {path: '/hakkimizda', component: Page_Hakkimizda},
+        {path: '/urunler', component: Page_Urunler},
+        {path: '/iletisim', component: Page_Iletisim},
+    ];
+
+    const router = new VueRouter({
+        routes
+    });
+
+    const app = new Vue({
+        router,
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            urunlerAdresi: '/urunler'
+        }
+    })
+</script>
+</body>
+</html>

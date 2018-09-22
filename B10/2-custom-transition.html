@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <style>
+        .custom-enter-active {
+            transition: all .5s ease;
+        }
+        .custom-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .custom-enter,
+        .custom-leave-to {
+            opacity: 0;
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body class="p-5">
+<div id="app">
+    <button class="btn btn-primary" @click="isCustomShowing = !isCustomShowing">Özel Animasyon</button>
+    <transition name="custom">
+        <div class="alert alert-success" v-if="isCustomShowing">Özel Animasyon</div>
+    </transition>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            isCustomShowing: false
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <style>
+        .custom-enter-active {
+            transition: all .5s ease;
+        }
+
+        .custom-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        .custom-enter,
+        .custom-leave-to {
+            opacity: 0;
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body class="p-5">
+<div id="app">
+    <button class="btn btn-primary" @click="isCustomShowing = !isCustomShowing">Geçiş Animasyonu</button>
+    <transition name="custom" mode="out-in">
+        <div :key="isCustomShowing">
+            <div class="alert alert-success" v-if="isCustomShowing">Kutu 1</div>
+            <div class="alert alert-success" v-else>Kutu 2</div>
+        </div>
+    </transition>
+
+    <button class="btn btn-primary" @click="reload">Yükle</button>
+    <transition name="custom" mode="out-in">
+        <div :key="loading">
+            <div class="alert alert-success" v-if="loading">Yükleniyor...</div>
+            <div class="alert alert-success" v-else>Yüklendi</div>
+        </div>
+    </transition>
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        name: 'Uzaktan Kurs',
+        data: {
+            isCustomShowing: false,
+            loading: false
+        },
+        methods: {
+            reload() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                    //
+                }, 5000);
+            }
+        }
+    })
+</script>
+</body>
+</html>
