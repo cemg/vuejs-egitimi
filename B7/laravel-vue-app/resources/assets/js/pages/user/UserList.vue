@@ -37,6 +37,8 @@
 <script>
     import Pagination from '../../components/Pagination';
     import UserModal from './UserModal';
+    import ApiService from '../../services/api.service';
+    import UserService from '../../services/user.service';
 
     export default {
         components: {Pagination, UserModal},
@@ -55,16 +57,13 @@
             fetchData(page = 1) {
                 this.errorMessage = null;
                 this.list = null;
-                axios.get("/users", {params: {page}})
+                //ApiService.get("/users", {params: {page}})
+                UserService.GetByPage(page)
                     .then(response => {
-                        this.list = response.data.data;
-                        this.meta = response.data.meta;
-                    })
-                    .catch(error => {
-                        if (error.response != null)
-                            this.errorMessage = error.response.data.message;
-                        else
-                            this.errorMessage = error.message;
+                        if (response && response.data) {
+                            this.list = response.data.data;
+                            this.meta = response.data.meta;
+                        }
                     });
             },
             createData() {
@@ -76,17 +75,12 @@
                 this.fetchData();
             },
             editData(id) {
-                axios.get("/users/" + id)
+                //ApiService.get("/users/" + id)
+                UserService.GetById(id)
                     .then(response => {
                         this.$refs.userModal.errorMessage = '';
                         this.item = response.data;
                         $('#userModal').modal('show');
-                    })
-                    .catch(error => {
-                        if (error.response != null)
-                            this.errorMessage = error.response.data.message;
-                        else
-                            this.errorMessage = error.message;
                     });
             },
             deleteData(id) {
@@ -99,16 +93,11 @@
                     confirmButtonText: 'Sil'
                 }).then(result => {
                     if (result.value) {
-                        axios.delete("/users/" + id)
+                        //ApiService.delete("/users/" + id)
+                        UserService.DeleteById(id)
                             .then(response => {
                                 this.fetchData();
                                 toastr.success('Kayıt silindi', 'Kullanıcı');
-                            })
-                            .catch(error => {
-                                if (error.response != null)
-                                    this.errorMessage = error.response.data.message;
-                                else
-                                    this.errorMessage = error.message;
                             });
                     }
                 });

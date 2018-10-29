@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="p-5">
+<div id="app">
+
+</div>
+
+<script src="../assets/js/vue.js"></script>
+<script>
+    /*Vue.mixin({
+        data() {
+            return {
+                message: 'Merhaba Mixin!'
+            }
+        },
+        created() {
+            console.log('Mixin oluşturuldu.');
+        },
+        methods: {
+            getDate() {
+                var tarih = new Date();
+                console.log('Mixin:', tarih.toLocaleDateString());
+            }
+        }
+    });*/
+
+    var ortakMixin = {
+        data: {
+            message: 'Merhaba Mixin!'
+        },
+        created() {
+            console.log('Mixin oluşturuldu.');
+        },
+        methods: {
+            getDate() {
+                var tarih = new Date();
+                console.log('Mixin:', tarih.toLocaleDateString());
+            }
+        }
+    };
+
+    const app = new Vue({
+        el: '#app',
+        mixins: [ortakMixin],
+        name: 'Uzaktan Kurs',
+        data: {
+            message: 'Merhaba Vue Instance!'
+        },
+        created() {
+            console.log('Instance oluşturuldu.');
+        },
+        methods: {
+            getDate() {
+                var tarih = new Date();
+                console.log('Instance:', tarih.toLocaleDateString());
+            }
+        }
+    })
+</script>
+</body>
+</html>
